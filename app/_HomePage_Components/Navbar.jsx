@@ -1,6 +1,6 @@
 "use client"
 import { useState } from "react";
-import { ChevronDown, ChevronRight, Menu, X, Zap, Layers, Users, BarChart, Code, Palette, Rocket, Shield, Globe, BookOpen, Briefcase, Award, Search } from "lucide-react";
+import { ChevronDown, ChevronRight, Menu, X, Zap, cpu, Layers, Users, BarChart, Code, Palette, Rocket, Shield, Globe, BookOpen, Briefcase, Award, Search, Cpu, Syringe, BriefcaseBusiness, CircleDivide, Folder, HandCoins, Notebook } from "lucide-react";
 import Link from "next/link";
 
 export default function Navbar() {
@@ -12,43 +12,45 @@ export default function Navbar() {
 
     const megaMenuCategories = [
         {
-            title: "Getting Started",
-            items: [
-                { icon: Zap, title: "Quick Start", desc: "Get up and running", href: "#" },
-                { icon: BookOpen, title: "Documentation", desc: "Complete guides", href: "#" },
-                { icon: Rocket, title: "Tutorials", desc: "Step-by-step lessons", href: "#" },
-                { icon: Award, title: "Best Practices", desc: "Learn from experts", href: "#" },
-            ]
-        },
-        {
-            title: "Templates & Tools",
+            title: "Popular Courses",
             items: [
                 {
-                    icon: Layers,
-                    title: "Templates",
-                    desc: "Pre-built solutions",
+                    icon: Cpu,
+                    title: "Btech",
                     href: "#",
+                    desc: "Bachelor of Technology",
                     submenu: [
-                        { title: "Landing Pages", href: "#", desc: "Convert visitors" },
-                        { title: "Dashboards", href: "#", desc: "Analytics & metrics" },
-                        { title: "E-commerce", href: "#", desc: "Online stores" },
-                        { title: "SaaS Apps", href: "#", desc: "Web applications" },
-                        { title: "Portfolios", href: "#", desc: "Showcase work" },
-                        { title: "Blogs", href: "#", desc: "Content platforms" },
+                        { title: "Computer Science & Engineering", href: "/computer_Science" },
+                        { title: "Electronics & Communication", href: "#" },
+                        { title: "Electrical Enginerring", href: "#"},
+                        { title: "Mechanical Engineering", href: "#" },
+                        { title: "Civil Engineering", href: "#" },
+                       
                     ]
                 },
-                { icon: Code, title: "Components", desc: "Reusable UI blocks", href: "#" },
-                { icon: Palette, title: "Design System", desc: "Brand guidelines", href: "#" },
-                { icon: Globe, title: "Integrations", desc: "Connect tools", href: "#" },
+                { icon: Syringe, title: "BPharma", desc: "Bachelor of Pharmacy", href: "#" },
+                { icon: BriefcaseBusiness, title: "MBA", desc: "Master of Business Administration", href: "#" },
+                { icon: Code, title: "BCA", desc: "Bachelor of Computer Applications", href: "#" },
+                { icon: Code, title: "MCA", desc: "Master of Computer Applications", href: "#" },
             ]
         },
         {
-            title: "Community & Support",
+            title: "Placement Support",
             items: [
-                { icon: Users, title: "Community", desc: "Join discussions", href: "#" },
-                { icon: Briefcase, title: "Partner Program", desc: "Grow together", href: "#" },
-                { icon: BarChart, title: "Analytics", desc: "Track progress", href: "#" },
-                { icon: Shield, title: "Security", desc: "Stay protected", href: "#" },
+               
+                { icon: Code, title: "Coding Questons",  href: "/coding" },
+                { icon: CircleDivide, title: "Aptitude",  href: "/aptitude" },
+                { icon: Users, title: "Interview Questions",  href: "/interview" },
+                { icon: Folder, title: "Projects",  href: "/proj" },
+            ]
+        },
+        {
+            title: "Others",
+            items: [
+                { icon: Notebook, title: "Result",  href: "/result" },
+                { icon: HandCoins, title: "UP Scholarship", href: "/Scloarship" },
+                { icon: BarChart, title: "Privacy Policy",  href: "/privacy" },
+                { icon: Shield, title: "Terms & Conditions",  href: "/Terms" },
             ]
         },
     ];
