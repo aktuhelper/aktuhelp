@@ -1,4 +1,5 @@
 "use client";
+"use client";
 import React, { useState } from 'react';
 import { Calendar, Clock, ArrowRight, Search, Tag, TrendingUp, Bookmark, Share2, Eye, Heart } from 'lucide-react';
 
@@ -221,11 +222,11 @@ export default function BlogPage() {
                             <span className="text-sm text-violet-700">Latest Stories</span>
                         </div>
 
-                        <h1 className="text-6xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-slate-900 via-violet-600 to-cyan-600 bg-clip-text text-transparent leading-tight">
+                        <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-6 bg-gradient-to-r from-slate-900 via-violet-600 to-cyan-600 bg-clip-text text-transparent leading-tight">
                             Our Blog
                         </h1>
 
-                        <p className="text-xl text-slate-600 max-w-2xl mx-auto">
+                        <p className="text-base sm:text-lg md:text-xl text-slate-600 max-w-2xl mx-auto px-4">
                             Insights, stories, and updates from our team. Learn about our products, culture, and the future we're building.
                         </p>
                     </div>
@@ -244,14 +245,14 @@ export default function BlogPage() {
                         </div>
 
                         {/* Category Pills */}
-                        <div className="flex flex-wrap gap-3 justify-center">
+                        <div className="flex flex-wrap gap-2 sm:gap-3 justify-center">
                             {categories.map((cat) => (
                                 <button
                                     key={cat.name}
                                     onClick={() => setSelectedCategory(cat.name)}
-                                    className={`px-5 py-2.5 rounded-full font-medium transition-all duration-300 transform hover:scale-105 ${selectedCategory === cat.name
-                                            ? 'bg-gradient-to-r from-violet-500 to-purple-600 text-white shadow-lg shadow-violet-500/30'
-                                            : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
+                                    className={`px-3 sm:px-5 py-2 sm:py-2.5 rounded-full text-sm font-medium transition-all duration-300 transform hover:scale-105 ${selectedCategory === cat.name
+                                        ? 'bg-gradient-to-r from-violet-500 to-purple-600 text-white shadow-lg shadow-violet-500/30'
+                                        : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
                                         }`}
                                 >
                                     {cat.name} <span className="text-xs opacity-75">({cat.count})</span>
@@ -277,7 +278,7 @@ export default function BlogPage() {
                             <div className="absolute -inset-1 bg-gradient-to-r from-violet-500 via-purple-500 to-cyan-500 rounded-2xl blur-xl opacity-30 group-hover:opacity-50 transition-all duration-500" />
                             <div className="relative bg-white border-2 border-slate-200 rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300">
                                 <div className="grid md:grid-cols-5 gap-0">
-                                    <div className={`${featuredBlog.image} md:col-span-2 p-8 flex items-center justify-center relative overflow-hidden`}>
+                                    <div className={`${featuredBlog.image} md:col-span-2 p-8 min-h-[200px] flex items-center justify-center relative overflow-hidden`}>
                                         <div className="absolute inset-0 bg-gradient-to-br from-black/20 to-transparent" />
                                         <div className="relative text-white text-center">
                                             <div className="w-16 h-16 bg-white/20 backdrop-blur-sm rounded-xl flex items-center justify-center mb-4 mx-auto">
@@ -288,7 +289,7 @@ export default function BlogPage() {
                                         </div>
                                     </div>
 
-                                    <div className="md:col-span-3 p-6">
+                                    <div className="md:col-span-3 p-4 sm:p-6">
                                         <div className="flex items-center gap-2 mb-3">
                                             <span className="px-2.5 py-0.5 bg-violet-100 text-violet-600 rounded-full text-xs font-semibold">
                                                 {featuredBlog.category}
@@ -301,15 +302,15 @@ export default function BlogPage() {
                                             )}
                                         </div>
 
-                                        <h3 className="text-2xl font-bold mb-3 group-hover:text-violet-600 transition-colors line-clamp-2">
+                                        <h3 className="text-xl sm:text-2xl font-bold mb-3 group-hover:text-violet-600 transition-colors line-clamp-2">
                                             {featuredBlog.title}
                                         </h3>
 
-                                        <p className="text-slate-600 mb-4 leading-relaxed line-clamp-2">
+                                        <p className="text-sm sm:text-base text-slate-600 mb-4 leading-relaxed line-clamp-2">
                                             {featuredBlog.excerpt}
                                         </p>
 
-                                        <div className="flex items-center justify-between mb-4">
+                                        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-4">
                                             <div className="flex items-center gap-2">
                                                 <div className="w-10 h-10 bg-gradient-to-br from-violet-400 to-purple-600 rounded-full" />
                                                 <div>
@@ -319,8 +320,8 @@ export default function BlogPage() {
                                             </div>
                                         </div>
 
-                                        <div className="flex items-center justify-between">
-                                            <div className="flex items-center gap-3 text-xs text-slate-500">
+                                        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+                                            <div className="flex flex-wrap items-center gap-2 sm:gap-3 text-xs text-slate-500">
                                                 <span className="flex items-center gap-1">
                                                     <Calendar className="w-3.5 h-3.5" />
                                                     {new Date(featuredBlog.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
@@ -335,7 +336,7 @@ export default function BlogPage() {
                                                 </span>
                                             </div>
 
-                                            <button className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-violet-500 to-purple-600 text-white rounded-lg text-sm font-semibold hover:from-violet-600 hover:to-purple-700 transition-all transform hover:scale-105 shadow-lg shadow-violet-500/30">
+                                            <button className="flex items-center justify-center gap-2 px-4 py-2 bg-gradient-to-r from-violet-500 to-purple-600 text-white rounded-lg text-sm font-semibold hover:from-violet-600 hover:to-purple-700 transition-all transform hover:scale-105 shadow-lg shadow-violet-500/30 w-full sm:w-auto">
                                                 Read More
                                                 <ArrowRight className="w-4 h-4" />
                                             </button>
@@ -355,11 +356,12 @@ export default function BlogPage() {
                         <h2 className="text-2xl font-bold">Latest Articles</h2>
                         <div className="flex items-center gap-2 text-sm text-slate-500">
                             <Eye className="w-4 h-4" />
-                            <span>Showing {displayedBlogs.length} of {regularBlogs.length} articles</span>
+                            <span className="hidden sm:inline">Showing {displayedBlogs.length} of {regularBlogs.length} articles</span>
+                            <span className="sm:hidden">{displayedBlogs.length}/{regularBlogs.length}</span>
                         </div>
                     </div>
 
-                    <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
                         {displayedBlogs.map((blog, i) => (
                             <div
                                 key={blog.id}
@@ -486,21 +488,21 @@ export default function BlogPage() {
                 <div className="max-w-4xl mx-auto">
                     <div className="relative">
                         <div className="absolute inset-0 bg-gradient-to-r from-violet-500/20 via-purple-500/20 to-cyan-500/20 rounded-3xl blur-3xl" />
-                        <div className="relative bg-white border-2 border-slate-200 rounded-3xl p-12 text-center shadow-xl">
+                        <div className="relative bg-white border-2 border-slate-200 rounded-3xl p-6 sm:p-8 md:p-12 text-center shadow-xl">
                             <div className="w-16 h-16 bg-gradient-to-br from-violet-500 to-purple-600 rounded-2xl flex items-center justify-center mx-auto mb-6">
                                 <TrendingUp className="w-8 h-8 text-white" />
                             </div>
-                            <h2 className="text-3xl font-bold mb-4">Never Miss an Update</h2>
-                            <p className="text-slate-600 mb-8 max-w-lg mx-auto">
+                            <h2 className="text-2xl sm:text-3xl font-bold mb-4">Never Miss an Update</h2>
+                            <p className="text-sm sm:text-base text-slate-600 mb-8 max-w-lg mx-auto">
                                 Subscribe to our newsletter and get the latest articles, insights, and updates delivered straight to your inbox.
                             </p>
-                            <div className="flex gap-3 max-w-md mx-auto">
+                            <div className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
                                 <input
                                     type="email"
                                     placeholder="Enter your email"
                                     className="flex-grow px-4 py-3 rounded-xl border-2 border-slate-200 focus:border-violet-500 focus:shadow-lg focus:shadow-violet-500/20 outline-none transition-all"
                                 />
-                                <button className="px-6 py-3 bg-gradient-to-r from-violet-500 to-purple-600 text-white rounded-xl font-semibold hover:from-violet-600 hover:to-purple-700 transition-all transform hover:scale-105 shadow-lg shadow-violet-500/30">
+                                <button className="px-6 py-3 bg-gradient-to-r from-violet-500 to-purple-600 text-white rounded-xl font-semibold hover:from-violet-600 hover:to-purple-700 transition-all transform hover:scale-105 shadow-lg shadow-violet-500/30 whitespace-nowrap">
                                     Subscribe
                                 </button>
                             </div>
