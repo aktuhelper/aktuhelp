@@ -1,6 +1,7 @@
 "use client"
 import { useState } from "react";
 import { ChevronDown, ChevronRight, Menu, X, Zap, Layers, Users, BarChart, Code, Palette, Rocket, Shield, Globe, BookOpen, Briefcase, Award, Search } from "lucide-react";
+import Link from "next/link";
 
 export default function Navbar() {
     const [isDropdownOpen, setDropdownOpen] = useState(false);
@@ -77,8 +78,8 @@ export default function Navbar() {
                     <nav aria-label="Global" className="hidden lg:block">
                         <ul className="flex items-center gap-1">
                             <li>
-                                <a className="px-4 py-2 text-gray-700 font-medium transition hover:text-blue-600 rounded-lg hover:bg-blue-50" href="#">
-                                    About
+                                <a className="px-4 py-2 text-gray-700 font-medium transition hover:text-blue-600 rounded-lg hover:bg-blue-50" href="/">
+                                    Home
                                 </a>
                             </li>
 
@@ -168,21 +169,21 @@ export default function Navbar() {
                             </li>
 
                             <li>
-                                <a className="px-4 py-2 text-gray-700 font-medium transition hover:text-blue-600 rounded-lg hover:bg-blue-50" href="#">
-                                    Careers
-                                </a>
+                                <Link className="px-4 py-2 text-gray-700 font-medium transition hover:text-blue-600 rounded-lg hover:bg-blue-50" href="/Contact">
+                                    Contact 
+                                </Link>
                             </li>
 
                             <li>
-                                <a className="px-4 py-2 text-gray-700 font-medium transition hover:text-blue-600 rounded-lg hover:bg-blue-50" href="#">
-                                    Services
-                                </a>
+                                <Link className="px-4 py-2 text-gray-700 font-medium transition hover:text-blue-600 rounded-lg hover:bg-blue-50" href="/About">
+                                    About
+                                </Link>
                             </li>
 
                             <li>
-                                <a className="px-4 py-2 text-gray-700 font-medium transition hover:text-blue-600 rounded-lg hover:bg-blue-50" href="#">
+                                <Link className="px-4 py-2 text-gray-700 font-medium transition hover:text-blue-600 rounded-lg hover:bg-blue-50" href="/Blog">
                                     Blog
-                                </a>
+                                </Link>
                             </li>
                         </ul>
                     </nav>

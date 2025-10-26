@@ -1,18 +1,18 @@
-import Image from "next/image";
+import FAQSection from "./_HomePage_Components/Faq";
+import FeaturesHighlight from "./_HomePage_Components/FeatureHighLight";
+import HeroSection from "./_HomePage_Components/Hero";
+import ServicesSection from "./_HomePage_Components/Services";
+import StatisticsSection from "./_HomePage_Components/Statics";
 
-import Hero from "./_components/Hero";
-import Navbar from "./_components/Navbar";
-import ServicesSection from "./_components/Services";
-import StatisticsSection from "./_components/Statics";
-import FeaturesHighlight from "./_components/FeatureHighLight";
-import FAQSection from "./_components/Faq";
+
+
 
 export default function Home() {
   return (
     <div>
-   
-      <Hero />
-      <ServicesSection />
+  
+      <HeroSection/>
+      <ServicesSection/>
       <StatisticsSection />
       <FeaturesHighlight />
       <FAQSection />

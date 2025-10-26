@@ -1,7 +1,8 @@
 import { Outfit } from "next/font/google";
 import "./globals.css";
-import Navbar from "./_components/Navbar";
-import Footer from "./_components/Footer";
+import Navbar from "./_HomePage_Components/Navbar";
+import Footer from "./_HomePage_Components/Footer";
+
 
 const outfit = Outfit({
   variable: "--font-outfit",
