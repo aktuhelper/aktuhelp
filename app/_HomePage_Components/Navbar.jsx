@@ -272,9 +272,9 @@ export default function Navbar() {
                     <div className="lg:hidden border-t border-gray-100 bg-white max-h-[calc(100vh-4rem)] overflow-y-auto">
                         <nav className="px-4 py-4 space-y-2">
 
-                            <a href="#" className="block px-4 py-3 text-gray-700 font-medium rounded-lg hover:bg-blue-50 hover:text-blue-600 transition">
-                                About
-                            </a>
+                            <Link href="/" className="block px-4 py-3 text-gray-700 font-medium rounded-lg hover:bg-blue-50 hover:text-blue-600 transition">
+                                Home
+                            </Link>
 
                             {/* Explore Section with Dropdown */}
                             <div className="space-y-2">
@@ -355,13 +355,13 @@ export default function Navbar() {
                                 )}
                             </div>
 
-                            <a href="#" className="block px-4 py-3 text-gray-700 font-medium rounded-lg hover:bg-blue-50 hover:text-blue-600 transition">
-                                Careers
+                            <a href="/Contact" className="block px-4 py-3 text-gray-700 font-medium rounded-lg hover:bg-blue-50 hover:text-blue-600 transition">
+                                Contact
                             </a>
-                            <a href="#" className="block px-4 py-3 text-gray-700 font-medium rounded-lg hover:bg-blue-50 hover:text-blue-600 transition">
-                                Services
+                            <a href="/About" className="block px-4 py-3 text-gray-700 font-medium rounded-lg hover:bg-blue-50 hover:text-blue-600 transition">
+                                About
                             </a>
-                            <a href="#" className="block px-4 py-3 text-gray-700 font-medium rounded-lg hover:bg-blue-50 hover:text-blue-600 transition">
+                            <a href="/Blog" className="block px-4 py-3 text-gray-700 font-medium rounded-lg hover:bg-blue-50 hover:text-blue-600 transition">
                                 Blog
                             </a>
 
