@@ -9,16 +9,18 @@ import {
     Users,
     TrendingUp,
 } from "lucide-react";
+import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
+import { Button } from "@/components/ui/button";
 
 export default function HeroSection() {
     const [hoveredCard, setHoveredCard] = useState(null);
-
+    const { user, isAuthenticated } = useKindeBrowserClient();
     const features = [
         { icon: BookOpen, title: "10,000+ Resources", desc: "Comprehensive study materials" },
         { icon: Users, title: "50,000+ Students", desc: "Active learning community" },
         { icon: TrendingUp, title: "95% Success Rate", desc: "Proven academic success" },
     ];
-
+const username = isAuthenticated ? user?.given_name || user?.email : null;
     const benefits = [
         "Access to previous year papers",
         "Expert-verified study notes",
@@ -69,11 +71,12 @@ export default function HeroSection() {
 
                         <div className="flex flex-wrap gap-4 mt-4">
                             <a
-                                href="#get-started"
+                                href="/"
                                 className="inline-flex items-center gap-2 px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-all"
                             >
-                                Get Started Free <ArrowRight className="w-4 h-4" />
+                                {username ? `Welcome ${username}` : "Get Started Free"} <ArrowRight className="w-4 h-4" />
                             </a>
+
                             <a
                                 href="#watch-demo"
                                 className="inline-flex items-center gap-2 px-6 py-3 bg-white border border-gray-200 text-gray-700 rounded-lg hover:shadow-md transition-all"

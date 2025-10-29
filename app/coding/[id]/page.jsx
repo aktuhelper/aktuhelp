@@ -1,14 +1,23 @@
 'use client';
-
-import { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { ArrowLeft, Clock, BarChart3, Code2, BookOpen, Lightbulb, Sparkles } from 'lucide-react';
 
 export default function SolutionPage({ params }) {
-    const id = params?.id || '1';
+
+    const resolvedParams = React.use(params); 
+    const id = resolvedParams.id || 'na';
     const [activeTab, setActiveTab] = useState('python');
     const [isConverting, setIsConverting] = useState(false);
     const [convertedCode, setConvertedCode] = useState({});
-
+    useEffect(() => {
+        const titles = {
+            1: 'Two Sum | Coding Practice',
+            2: 'Reverse Linked List | Coding Practice',
+            3: 'Valid Parentheses | Coding Practice'
+        };
+        document.title = titles[id] || 'Coding Problem | Practice';
+    }, [id]);
+ // fallback if not found
     // Base solution in Python
     const baseSolution = {
         python: `def twoSum(nums, target):
@@ -34,42 +43,43 @@ target = 9
 print(twoSum(nums, target))  # Output: [0, 1]`
     };
 
-    const question = {
-        id: 1,
-        title: 'Two Sum',
-        difficulty: 'easy',
-        topic: 'Arrays',
-        description: 'Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target. You may assume that each input would have exactly one solution, and you may not use the same element twice. You can return the answer in any order.',
-        examples: [
-            {
-                input: 'nums = [2,7,11,15], target = 9',
-                output: '[0,1]',
-                explanation: 'Because nums[0] + nums[1] == 9, we return [0, 1].'
-            },
-            {
-                input: 'nums = [3,2,4], target = 6',
-                output: '[1,2]',
-                explanation: 'Because nums[1] + nums[2] == 6, we return [1, 2].'
-            }
-        ],
-        constraints: [
-            '2 <= nums.length <= 10⁴',
-            '-10⁹ <= nums[i] <= 10⁹',
-            '-10⁹ <= target <= 10⁹',
-            'Only one valid answer exists.'
-        ],
-        timeComplexity: 'O(n)',
-        spaceComplexity: 'O(n)',
-        algorithm: [
-            'Create a hash map to store the numbers we\'ve seen and their indices',
-            'Iterate through the array',
-            'For each number, calculate the complement (target - current number)',
-            'Check if the complement exists in the hash map',
-            'If found, return the indices of both numbers',
-            'If not found, add the current number and its index to the hash map',
-            'Continue until we find the pair'
-        ],
-        pseudocode: `function twoSum(nums, target):
+    const questions = [
+        {
+            id: 1,
+            title: 'Two Sum',
+            difficulty: 'easy',
+            topic: 'Arrays',
+            description: 'Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target. You may assume that each input would have exactly one solution, and you may not use the same element twice. You can return the answer in any order.',
+            examples: [
+                {
+                    input: 'nums = [2,7,11,15], target = 9',
+                    output: '[0,1]',
+                    explanation: 'Because nums[0] + nums[1] == 9, we return [0, 1].'
+                },
+                {
+                    input: 'nums = [3,2,4], target = 6',
+                    output: '[1,2]',
+                    explanation: 'Because nums[1] + nums[2] == 6, we return [1, 2].'
+                }
+            ],
+            constraints: [
+                '2 <= nums.length <= 10⁴',
+                '-10⁹ <= nums[i] <= 10⁹',
+                '-10⁹ <= target <= 10⁹',
+                'Only one valid answer exists.'
+            ],
+            timeComplexity: 'O(n)',
+            spaceComplexity: 'O(n)',
+            algorithm: [
+                'Create a hash map to store the numbers we\'ve seen and their indices',
+                'Iterate through the array',
+                'For each number, calculate the complement (target - current number)',
+                'Check if the complement exists in the hash map',
+                'If found, return the indices of both numbers',
+                'If not found, add the current number and its index to the hash map',
+                'Continue until we find the pair'
+            ],
+            pseudocode: `function twoSum(nums, target):
     create empty hashmap
     
     for i from 0 to length(nums) - 1:
@@ -81,7 +91,101 @@ print(twoSum(nums, target))  # Output: [0, 1]`
         hashmap[nums[i]] = i
     
     return empty array`
-    };
+        },
+
+        {
+            id: 2,
+            title: 'Reverse Linked List',
+            difficulty: 'easy',
+            topic: 'Linked List',
+            description: 'Given the head of a singly linked list, reverse the list, and return the reversed list.',
+            examples: [
+                {
+                    input: 'head = [1,2,3,4,5]',
+                    output: '[5,4,3,2,1]',
+                    explanation: 'The linked list is reversed from 1→2→3→4→5 to 5→4→3→2→1.'
+                },
+                {
+                    input: 'head = [1,2]',
+                    output: '[2,1]',
+                    explanation: 'The linked list 1→2 becomes 2→1.'
+                }
+            ],
+            constraints: [
+                'The number of nodes in the list is in the range [0, 5000].',
+                '-5000 <= Node.val <= 5000'
+            ],
+            timeComplexity: 'O(n)',
+            spaceComplexity: 'O(1)',
+            algorithm: [
+                'Initialize three pointers: prev = null, curr = head, next = null',
+                'While curr is not null:',
+                '   Save next = curr.next',
+                '   Set curr.next = prev',
+                '   Move prev = curr',
+                '   Move curr = next',
+                'Return prev (new head)'
+            ],
+            pseudocode: `function reverseList(head):
+    prev = null
+    curr = head
+    
+    while curr != null:
+        next = curr.next
+        curr.next = prev
+        prev = curr
+        curr = next
+    
+    return prev`
+        },
+
+        {
+            id: 3,
+            title: 'Valid Parentheses',
+            difficulty: 'easy',
+            topic: 'Stack',
+            description: 'Given a string s containing just the characters \'(\', \')\', \'{\', \'}\', \'[\' and \']\', determine if the input string is valid. An input string is valid if open brackets are closed by the same type of brackets and in the correct order.',
+            examples: [
+                {
+                    input: 's = "()"',
+                    output: 'true',
+                    explanation: 'The parentheses are correctly matched.'
+                },
+                {
+                    input: 's = "([)]"',
+                    output: 'false',
+                    explanation: 'The order of brackets is incorrect.'
+                }
+            ],
+            constraints: [
+                '1 <= s.length <= 10⁴',
+                's consists of parentheses only \'()[]{}\'.'
+            ],
+            timeComplexity: 'O(n)',
+            spaceComplexity: 'O(n)',
+            algorithm: [
+                'Use a stack to keep track of opening brackets',
+                'Iterate over each character in the string',
+                'If it\'s an opening bracket, push it onto the stack',
+                'If it\'s a closing bracket, check if the top of the stack has the matching opening bracket',
+                'If not, return false',
+                'At the end, if the stack is empty, return true; otherwise, false'
+            ],
+            pseudocode: `function isValid(s):
+    stack = empty stack
+    mapping = { ')': '(', ']': '[', '}': '{' }
+    
+    for char in s:
+        if char in mapping.values():
+            stack.push(char)
+        else:
+            if stack is empty or stack.pop() != mapping[char]:
+                return false
+    
+    return stack is empty`
+        }
+    ];
+    const question = questions.find(q => q.id === Number(id)) || questions[0];
 
     const languages = [
         { id: 'python', name: 'Python', color: 'bg-blue-600', icon: '🐍' },

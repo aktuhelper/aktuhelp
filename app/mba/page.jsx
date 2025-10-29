@@ -29,10 +29,10 @@ export default function StudyMaterialsPage() {
             { subject: 'English Communication', code: 'EN201', icon: GraduationCap }
         ],
         3: [
-            { subject: 'Object Oriented Programming', code: 'CS301', icon: Code },
-            { subject: 'Discrete Mathematics', code: 'MA301', icon: BookOpen },
-            { subject: 'Computer Organization', code: 'CS302', icon: FileText },
-            { subject: 'Database Management Systems', code: 'CS303', icon: BookMarked },
+            { subject: 'solid mechanics', code: 'civ101', icon: Code },
+            { subject: 'fulid mechanics', code: 'civ102', icon: BookOpen },
+            { subject: 'material testing', code: 'civ103', icon: FileText },
+            { subject: 'mechanics', code: 'civ104', icon: BookMarked },
             { subject: 'Operating Systems', code: 'CS304', icon: Lightbulb },
             { subject: 'Software Engineering', code: 'CS305', icon: GraduationCap }
         ],
@@ -43,40 +43,8 @@ export default function StudyMaterialsPage() {
             { subject: 'Web Technologies', code: 'CS404', icon: BookMarked },
             { subject: 'Computer Graphics', code: 'CS405', icon: Lightbulb },
             { subject: 'Design & Analysis of Algorithms', code: 'CS406', icon: GraduationCap }
-        ],
-        5: [
-            { subject: 'Artificial Intelligence', code: 'CS501', icon: Code },
-            { subject: 'Machine Learning', code: 'CS502', icon: BookOpen },
-            { subject: 'Compiler Design', code: 'CS503', icon: FileText },
-            { subject: 'Information Security', code: 'CS504', icon: BookMarked },
-            { subject: 'Cloud Computing', code: 'CS505', icon: Lightbulb },
-            { subject: 'Mobile Application Development', code: 'CS506', icon: GraduationCap },
-            { subject: 'Big Data Analytics', code: 'CS507', icon: Star }
-        ],
-        6: [
-            { subject: 'Deep Learning', code: 'CS601', icon: Code },
-            { subject: 'Natural Language Processing', code: 'CS602', icon: BookOpen },
-            { subject: 'Blockchain Technology', code: 'CS603', icon: FileText },
-            { subject: 'Internet of Things', code: 'CS604', icon: BookMarked },
-            { subject: 'Cyber Security', code: 'CS605', icon: Lightbulb },
-            { subject: 'Data Mining', code: 'CS606', icon: GraduationCap },
-            { subject: 'Distributed Systems', code: 'CS607', icon: Star }
-        ],
-        7: [
-            { subject: 'Project Management', code: 'CS701', icon: Code },
-            { subject: 'Software Testing', code: 'CS702', icon: BookOpen },
-            { subject: 'Elective I', code: 'CS703', icon: FileText },
-            { subject: 'Elective II', code: 'CS704', icon: BookMarked },
-            { subject: 'Industry Internship', code: 'CS705', icon: Lightbulb },
-            { subject: 'Mini Project', code: 'CS706', icon: GraduationCap }
-        ],
-        8: [
-            { subject: 'Major Project', code: 'CS801', icon: Code },
-            { subject: 'Elective III', code: 'CS802', icon: BookOpen },
-            { subject: 'Elective IV', code: 'CS803', icon: FileText },
-            { subject: 'Seminar', code: 'CS804', icon: BookMarked },
-            { subject: 'Professional Ethics', code: 'CS805', icon: GraduationCap }
         ]
+     
     };
     // Hardcoded syllabus links for CSE branch
  
@@ -88,10 +56,10 @@ export default function StudyMaterialsPage() {
             try {
                 const materialsData = {};
 
-                for (let sem = 1; sem <= 8; sem++) {
+                for (let sem = 1; sem <= 4; sem++) {
                     const data = await getStudyMaterials({
-                        courseName: "btech",
-                        branchName: "cse",
+                        courseName: "mba",
+                       
                         semester: sem,
                     });
                     console.log("Fetching data for semester:", sem);
@@ -297,7 +265,7 @@ export default function StudyMaterialsPage() {
                     <div className="text-center mb-8 sm:mb-12">
                         <div className="inline-flex items-center gap-2 bg-blue-50 border border-blue-200 rounded-full px-4 py-2 mb-4 sm:mb-6">
                             <GraduationCap className="w-4 h-4 text-blue-600" />
-                            <span className="text-xs sm:text-sm text-blue-700">Computer Science & Engineering</span>
+                            <span className="text-xs sm:text-sm text-blue-700">MBA</span>
                         </div>
 
                         <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 sm:mb-6 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent leading-tight px-4">

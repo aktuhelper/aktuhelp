@@ -3,7 +3,6 @@ import "./globals.css";
 import Navbar from "./_HomePage_Components/Navbar";
 import Footer from "./_HomePage_Components/Footer";
 
-
 const outfit = Outfit({
   variable: "--font-outfit",
   subsets: ["latin"],
@@ -14,7 +13,7 @@ export const metadata = {
   title: "Aktuhelper Home Page",
   description: "Professional Homepage built with Outfit font",
   icons: {
-    icon: "/l.svg",
+    icon: "/logoxxx.svg",
   },
 };
 
@@ -22,12 +21,11 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={`${outfit.variable} antialiased`}>
-        {/* Navbar outside stacking context */}
-    <Navbar/>
+        <Navbar />
         <main>
           {children}
         </main>
-        <Footer/>
+        <Footer />
       </body>
     </html>
   );

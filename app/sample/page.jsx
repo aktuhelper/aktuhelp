@@ -2,6 +2,8 @@
 import React, { useState, useEffect } from 'react';
 import { BookOpen, FileText, Download, Search, Calendar, Star, TrendingUp, CheckCircle, Clock, FileQuestion, Lightbulb, BookMarked, GraduationCap, Code, X, ChevronRight, Loader2 } from 'lucide-react';
 import { getStudyMaterials } from '../_utils/GlobalApi';
+
+
 export default function StudyMaterialsPage() {
     const [selectedSemester, setSelectedSemester] = useState(1);
     const [searchQuery, setSearchQuery] = useState('');

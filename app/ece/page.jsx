@@ -29,10 +29,10 @@ export default function StudyMaterialsPage() {
             { subject: 'English Communication', code: 'EN201', icon: GraduationCap }
         ],
         3: [
-            { subject: 'Object Oriented Programming', code: 'CS301', icon: Code },
-            { subject: 'Discrete Mathematics', code: 'MA301', icon: BookOpen },
-            { subject: 'Computer Organization', code: 'CS302', icon: FileText },
-            { subject: 'Database Management Systems', code: 'CS303', icon: BookMarked },
+            { subject: 'solid mechanics', code: 'civ101', icon: Code },
+            { subject: 'fulid mechanics', code: 'civ102', icon: BookOpen },
+            { subject: 'material testing', code: 'civ103', icon: FileText },
+            { subject: 'mechanics', code: 'civ104', icon: BookMarked },
             { subject: 'Operating Systems', code: 'CS304', icon: Lightbulb },
             { subject: 'Software Engineering', code: 'CS305', icon: GraduationCap }
         ],
@@ -91,7 +91,7 @@ export default function StudyMaterialsPage() {
                 for (let sem = 1; sem <= 8; sem++) {
                     const data = await getStudyMaterials({
                         courseName: "btech",
-                        branchName: "cse",
+                        branchName: "ece",
                         semester: sem,
                     });
                     console.log("Fetching data for semester:", sem);
@@ -297,7 +297,7 @@ export default function StudyMaterialsPage() {
                     <div className="text-center mb-8 sm:mb-12">
                         <div className="inline-flex items-center gap-2 bg-blue-50 border border-blue-200 rounded-full px-4 py-2 mb-4 sm:mb-6">
                             <GraduationCap className="w-4 h-4 text-blue-600" />
-                            <span className="text-xs sm:text-sm text-blue-700">Computer Science & Engineering</span>
+                            <span className="text-xs sm:text-sm text-blue-700">Electronics & Communication Engineering</span>
                         </div>
 
                         <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 sm:mb-6 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent leading-tight px-4">

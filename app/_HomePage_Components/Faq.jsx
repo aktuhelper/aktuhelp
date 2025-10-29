@@ -191,13 +191,13 @@ export default function FAQSection() {
                             </p>
                             <div className="flex flex-col sm:flex-row gap-3 justify-center">
                                 <a
-                                    href="/contact"
+                                    href="/Contact"
                                     className="px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold rounded-lg hover:shadow-lg transition-all hover:scale-105"
                                 >
                                     Contact Support
                                 </a>
                                 <a
-                                    href="/community"
+                                    href="https://t.me/aktuhelperoffical"
                                     className="px-6 py-3 bg-white text-gray-700 font-semibold rounded-lg hover:bg-gray-50 transition-all border-2 border-gray-200"
                                 >
                                     Join Community

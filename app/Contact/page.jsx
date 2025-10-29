@@ -1,6 +1,6 @@
 "use client"
 import React, { useState } from 'react';
-import { Mail, Send, CheckCircle, MessageSquare, Clock } from 'lucide-react';
+import { Mail, Send, CheckCircle, MessageSquare, Clock, AlertCircle, X } from 'lucide-react';
 
 export default function ContactUs() {
     const [formData, setFormData] = useState({
@@ -11,14 +11,40 @@ export default function ContactUs() {
     });
     const [focusedField, setFocusedField] = useState(null);
     const [submitted, setSubmitted] = useState(false);
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(null);
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        setSubmitted(true);
-        setTimeout(() => {
-            setSubmitted(false);
-            setFormData({ name: '', email: '', subject: '', message: '' });
-        }, 3000);
+        setLoading(true);
+        setError(null);
+
+        try {
+            const response = await fetch('/api/send-email', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData),
+            });
+
+            const data = await response.json();
+
+            if (!response.ok) {
+                throw new Error(data.error || 'Failed to send email');
+            }
+
+            setSubmitted(true);
+            setTimeout(() => {
+                setSubmitted(false);
+                setFormData({ name: '', email: '', subject: '', message: '' });
+            }, 5000);
+        } catch (err) {
+            setError(err.message);
+            setTimeout(() => setError(null), 5000);
+        } finally {
+            setLoading(false);
+        }
     };
 
     const handleChange = (e) => {
@@ -78,6 +104,52 @@ export default function ContactUs() {
 
     return (
         <div className="min-h-screen bg-white text-slate-900 overflow-hidden relative">
+            {/* Success Modal */}
+            {submitted && (
+                <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+                    <div
+                        className="absolute inset-0 bg-black bg-opacity-50 backdrop-blur-sm"
+                        onClick={() => setSubmitted(false)}
+                    />
+
+                    <div className="relative bg-white rounded-2xl shadow-2xl max-w-md w-full p-8 transform transition-all">
+                        <button
+                            onClick={() => setSubmitted(false)}
+                            className="absolute right-4 top-4 rounded-full p-1 hover:bg-slate-100 transition-colors"
+                        >
+                            <X className="h-5 w-5 text-slate-600" />
+                        </button>
+
+                        <div className="flex flex-col items-center justify-center py-6">
+                            <div className="relative mb-6">
+                                <div className="w-20 h-20 bg-gradient-to-br from-emerald-500 to-green-600 rounded-full flex items-center justify-center shadow-2xl shadow-emerald-500/40 animate-bounce">
+                                    <CheckCircle className="w-10 h-10 text-white" />
+                                </div>
+                                <div className="absolute inset-0 bg-gradient-to-br from-emerald-500 to-green-600 rounded-full blur-2xl opacity-30 animate-pulse" />
+                            </div>
+
+                            <h3 className="text-2xl font-bold mb-2 bg-gradient-to-r from-emerald-600 to-green-600 bg-clip-text text-transparent">
+                                Message Sent Successfully!
+                            </h3>
+
+                            <p className="text-center text-slate-600 mb-6">
+                                Thank you for reaching out. We've received your message and will get back to you within 24 hours.
+                            </p>
+
+                            <button
+                                onClick={() => {
+                                    setSubmitted(false);
+                                    setFormData({ name: '', email: '', subject: '', message: '' });
+                                }}
+                                className="px-6 py-3 bg-gradient-to-r from-emerald-500 to-green-600 text-white rounded-xl font-semibold hover:from-emerald-600 hover:to-green-700 transition-all duration-300 transform hover:scale-105 shadow-lg shadow-emerald-500/25"
+                            >
+                                Close
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
+
             {/* Animated Background Elements */}
             <div className="fixed inset-0 overflow-hidden pointer-events-none">
                 <div className="absolute top-20 right-20 w-72 h-72 bg-violet-500/5 rounded-full blur-3xl animate-pulse" />
@@ -85,8 +157,6 @@ export default function ContactUs() {
                 <div className="absolute top-1/2 left-1/2 w-80 h-80 bg-pink-500/5 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }} />
             </div>
 
-            {/* Hero Section */}
-           
             {/* Contact Methods Grid */}
             <div className="relative py-12 px-6">
                 <div className="max-w-7xl mx-auto">
@@ -140,101 +210,99 @@ export default function ContactUs() {
                                     <p className="text-slate-600 mb-8">Fill out the form below and we'll get back to you as soon as possible.</p>
                                 </div>
 
-                                {submitted ? (
-                                    <div className="relative flex flex-col items-center justify-center py-12 animate-fadeIn">
-                                        <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/5 to-green-500/5 rounded-2xl" />
-                                        <div className="relative">
-                                            <div className="w-24 h-24 bg-gradient-to-br from-emerald-500 to-green-600 rounded-full flex items-center justify-center mb-6 shadow-2xl shadow-emerald-500/40 animate-bounce">
-                                                <CheckCircle className="w-12 h-12 text-white" />
-                                            </div>
-                                            <div className="absolute inset-0 bg-gradient-to-br from-emerald-500 to-green-600 rounded-full blur-2xl opacity-30 animate-pulse" />
+                                <div className="space-y-6">
+                                    {error && (
+                                        <div className="bg-red-50 border border-red-200 rounded-xl p-4 flex items-center gap-3">
+                                            <AlertCircle className="w-5 h-5 text-red-600 flex-shrink-0" />
+                                            <p className="text-red-700 text-sm">{error}</p>
                                         </div>
-                                        <h3 className="text-3xl font-bold mb-3 bg-gradient-to-r from-emerald-600 to-green-600 bg-clip-text text-transparent">Message Sent!</h3>
-                                        <p className="text-slate-600 text-center text-lg">We'll get back to you within 24 hours.</p>
+                                    )}
+
+                                    <div className="relative">
+                                        <label className="block text-sm font-semibold mb-2 text-slate-700">Your Name</label>
+                                        <input
+                                            type="text"
+                                            name="name"
+                                            value={formData.name}
+                                            onChange={handleChange}
+                                            onFocus={() => setFocusedField('name')}
+                                            onBlur={() => setFocusedField(null)}
+                                            required
+                                            disabled={loading}
+                                            className={`w-full px-4 py-3 rounded-xl border-2 transition-all duration-300 outline-none disabled:opacity-50 disabled:cursor-not-allowed ${focusedField === 'name'
+                                                ? 'border-violet-500 shadow-lg shadow-violet-500/20'
+                                                : 'border-slate-200 hover:border-slate-300'
+                                                }`}
+                                            placeholder="John Doe"
+                                        />
                                     </div>
-                                ) : (
-                                    <div className="space-y-6">
-                                        <div className="relative">
-                                            <label className="block text-sm font-semibold mb-2 text-slate-700">Your Name</label>
-                                            <input
-                                                type="text"
-                                                name="name"
-                                                value={formData.name}
-                                                onChange={handleChange}
-                                                onFocus={() => setFocusedField('name')}
-                                                onBlur={() => setFocusedField(null)}
-                                                required
-                                                className={`w-full px-4 py-3 rounded-xl border-2 transition-all duration-300 outline-none ${focusedField === 'name'
-                                                        ? 'border-violet-500 shadow-lg shadow-violet-500/20'
-                                                        : 'border-slate-200 hover:border-slate-300'
-                                                    }`}
-                                                placeholder="John Doe"
-                                            />
-                                        </div>
 
-                                        <div className="relative">
-                                            <label className="block text-sm font-semibold mb-2 text-slate-700">Email Address</label>
-                                            <input
-                                                type="email"
-                                                name="email"
-                                                value={formData.email}
-                                                onChange={handleChange}
-                                                onFocus={() => setFocusedField('email')}
-                                                onBlur={() => setFocusedField(null)}
-                                                required
-                                                className={`w-full px-4 py-3 rounded-xl border-2 transition-all duration-300 outline-none ${focusedField === 'email'
-                                                        ? 'border-cyan-500 shadow-lg shadow-cyan-500/20'
-                                                        : 'border-slate-200 hover:border-slate-300'
-                                                    }`}
-                                                placeholder="john@example.com"
-                                            />
-                                        </div>
-
-                                        <div className="relative">
-                                            <label className="block text-sm font-semibold mb-2 text-slate-700">Subject</label>
-                                            <input
-                                                type="text"
-                                                name="subject"
-                                                value={formData.subject}
-                                                onChange={handleChange}
-                                                onFocus={() => setFocusedField('subject')}
-                                                onBlur={() => setFocusedField(null)}
-                                                required
-                                                className={`w-full px-4 py-3 rounded-xl border-2 transition-all duration-300 outline-none ${focusedField === 'subject'
-                                                        ? 'border-pink-500 shadow-lg shadow-pink-500/20'
-                                                        : 'border-slate-200 hover:border-slate-300'
-                                                    }`}
-                                                placeholder="How can we help?"
-                                            />
-                                        </div>
-
-                                        <div className="relative">
-                                            <label className="block text-sm font-semibold mb-2 text-slate-700">Message</label>
-                                            <textarea
-                                                name="message"
-                                                value={formData.message}
-                                                onChange={handleChange}
-                                                onFocus={() => setFocusedField('message')}
-                                                onBlur={() => setFocusedField(null)}
-                                                required
-                                                rows="5"
-                                                className={`w-full px-4 py-3 rounded-xl border-2 transition-all duration-300 outline-none resize-none ${focusedField === 'message'
-                                                        ? 'border-emerald-500 shadow-lg shadow-emerald-500/20'
-                                                        : 'border-slate-200 hover:border-slate-300'
-                                                    }`}
-                                                placeholder="Tell us more about your inquiry..."
-                                            />
-                                        </div>
-
-                                        <button
-                                            type="submit"
-                                            className="w-full bg-gradient-to-r from-violet-500 to-purple-600 text-white font-semibold py-4 rounded-xl hover:from-violet-600 hover:to-purple-700 transition-all duration-300 transform hover:scale-105 shadow-lg shadow-violet-500/25 flex items-center justify-center gap-2 group"
-                                        >
-                                            <span>Send Message</span>
-                                            <Send className="w-5 h-5 transform group-hover:translate-x-1 transition-transform" />
-                                        </button>
+                                    <div className="relative">
+                                        <label className="block text-sm font-semibold mb-2 text-slate-700">Email Address</label>
+                                        <input
+                                            type="email"
+                                            name="email"
+                                            value={formData.email}
+                                            onChange={handleChange}
+                                            onFocus={() => setFocusedField('email')}
+                                            onBlur={() => setFocusedField(null)}
+                                            required
+                                            disabled={loading}
+                                            className={`w-full px-4 py-3 rounded-xl border-2 transition-all duration-300 outline-none disabled:opacity-50 disabled:cursor-not-allowed ${focusedField === 'email'
+                                                ? 'border-cyan-500 shadow-lg shadow-cyan-500/20'
+                                                : 'border-slate-200 hover:border-slate-300'
+                                                }`}
+                                            placeholder="john@example.com"
+                                        />
                                     </div>
-                                )}
+
+                                    <div className="relative">
+                                        <label className="block text-sm font-semibold mb-2 text-slate-700">Subject</label>
+                                        <input
+                                            type="text"
+                                            name="subject"
+                                            value={formData.subject}
+                                            onChange={handleChange}
+                                            onFocus={() => setFocusedField('subject')}
+                                            onBlur={() => setFocusedField(null)}
+                                            required
+                                            disabled={loading}
+                                            className={`w-full px-4 py-3 rounded-xl border-2 transition-all duration-300 outline-none disabled:opacity-50 disabled:cursor-not-allowed ${focusedField === 'subject'
+                                                ? 'border-pink-500 shadow-lg shadow-pink-500/20'
+                                                : 'border-slate-200 hover:border-slate-300'
+                                                }`}
+                                            placeholder="How can we help?"
+                                        />
+                                    </div>
+
+                                    <div className="relative">
+                                        <label className="block text-sm font-semibold mb-2 text-slate-700">Message</label>
+                                        <textarea
+                                            name="message"
+                                            value={formData.message}
+                                            onChange={handleChange}
+                                            onFocus={() => setFocusedField('message')}
+                                            onBlur={() => setFocusedField(null)}
+                                            required
+                                            disabled={loading}
+                                            rows="5"
+                                            className={`w-full px-4 py-3 rounded-xl border-2 transition-all duration-300 outline-none resize-none disabled:opacity-50 disabled:cursor-not-allowed ${focusedField === 'message'
+                                                ? 'border-emerald-500 shadow-lg shadow-emerald-500/20'
+                                                : 'border-slate-200 hover:border-slate-300'
+                                                }`}
+                                            placeholder="Tell us more about your inquiry..."
+                                        />
+                                    </div>
+
+                                    <button
+                                        onClick={handleSubmit}
+                                        disabled={loading}
+                                        className="w-full bg-gradient-to-r from-violet-500 to-purple-600 text-white font-semibold py-4 rounded-xl hover:from-violet-600 hover:to-purple-700 transition-all duration-300 transform hover:scale-105 shadow-lg shadow-violet-500/25 flex items-center justify-center gap-2 group disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
+                                    >
+                                        <span>{loading ? 'Sending...' : 'Send Message'}</span>
+                                        <Send className="w-5 h-5 transform group-hover:translate-x-1 transition-transform" />
+                                    </button>
+                                </div>
                             </div>
                         </div>
 
@@ -298,10 +366,10 @@ export default function ContactUs() {
                     <div className="relative">
                         <div className="absolute inset-0 bg-gradient-to-r from-violet-500/20 via-purple-500/20 to-cyan-500/20 rounded-3xl blur-3xl" />
                         <div className="relative bg-slate-50 border border-slate-200 rounded-3xl p-12">
-                            <h2 className="text-3xl font-bold mb-4">Prefer to talk directly?</h2>
-                            <p className="text-slate-600 mb-6">Schedule a call with our team to discuss your needs in detail.</p>
+                            <h2 className="text-3xl font-bold mb-4">Ready to Join?</h2>
+                            <p className="text-slate-600 mb-6">Join our Community and become part of our Family</p>
                             <button className="px-8 py-4 bg-slate-900 text-white rounded-xl font-semibold hover:bg-slate-800 transition-all transform hover:scale-105 shadow-lg">
-                                Schedule a Call
+                                Join our Community
                             </button>
                         </div>
                     </div>

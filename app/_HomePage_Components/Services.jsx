@@ -1,9 +1,10 @@
 "use client";
 import { useState } from "react";
-
+import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
 export default function ServicesSection() {
+       const { user, isAuthenticated } = useKindeBrowserClient();
     const [activeService, setActiveService] = useState(null);
-
+    const username = isAuthenticated ? user?.given_name || user?.email : null;
     const services = [
         {
             icon: (
@@ -47,9 +48,9 @@ export default function ServicesSection() {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
                 </svg>
             ),
-            title: "Video Lectures",
-            description: "Recorded lectures from expert teachers covering complete syllabus",
-            features: ["HD quality", "Topic-wise", "Downloadable"],
+            title: "Placement Support",
+            description: "Get access to placement resources, interview prep and company insights",
+            features: ["Coding Questions", "Aptitude Prepartion", "Interview Questions","Project Ideas with Github Links"],
             color: "from-green-500 to-emerald-500",
             link: "/lectures",
         },
@@ -71,9 +72,9 @@ export default function ServicesSection() {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
                 </svg>
             ),
-            title: "Mock Tests",
-            description: "Practice with real exam-like tests and track your progress",
-            features: ["Timed tests", "Performance analytics", "Instant results"],
+            title: "Job Updates",
+            description: "Stay informed with the latest job openings and placement drives",
+            features: ["Regular updates", "Company insights", "Application tips"],
             color: "from-yellow-500 to-orange-500",
             link: "/tests",
         },
@@ -154,16 +155,7 @@ export default function ServicesSection() {
                                             className={`inline-flex items-center gap-2 text-xs font-semibold transition-all duration-300 ${isActive ? "text-blue-600" : "text-gray-700 group-hover:text-blue-600"
                                                 }`}
                                         >
-                                            Explore Now
-                                            <svg
-                                                className={`w-3.5 h-3.5 transition-transform duration-300 ${isActive ? "translate-x-1" : "group-hover:translate-x-1"
-                                                    }`}
-                                                fill="none"
-                                                stroke="currentColor"
-                                                viewBox="0 0 24 24"
-                                            >
-                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                                            </svg>
+                                           
                                         </a>
                                     </div>
                                 </div>
@@ -179,10 +171,10 @@ export default function ServicesSection() {
                             <p className="text-blue-100 text-sm">Join thousands of successful students today</p>
                         </div>
                         <a
-                            href="/signup"
+                            href="/"
                             className="px-6 py-2.5 bg-white text-blue-600 font-semibold rounded-lg hover:bg-gray-50 transition-all hover:scale-105 whitespace-nowrap text-sm"
                         >
-                            Get Started Free
+                            Get Started {username || null}
                         </a>
                     </div>
                 </div>
