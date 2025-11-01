@@ -42,7 +42,7 @@ console.log(user);
             title: "Placement Support",
             items: [
 
-                { icon: Code, title: "Coding Questons", href: "/coding" },
+               
                 { icon: CircleDivide, title: "Aptitude", href: "/aptitude" },
                 { icon: Users, title: "Interview Questions", href: "/interview" },
                 { icon: Folder, title: "Projects", href: "/proj" },
